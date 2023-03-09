@@ -15,6 +15,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         field: "username",
+        unique: true,
       },
       role: {
         type: Sequelize.STRING,
@@ -25,6 +26,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         field: "email",
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
