@@ -2,7 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 
 import db from '.';
 
-class User extends Model {
+class UserModel extends Model {
   declare id: number;
   declare username: string;
   declare email: string;
@@ -10,7 +10,7 @@ class User extends Model {
   declare role: string;
 }
 
-User.init(
+UserModel.init(
   {
     id: {
       primaryKey: true,
@@ -57,4 +57,4 @@ User.init(
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
-export default User;
+export default UserModel;

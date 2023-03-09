@@ -12,7 +12,6 @@
     "plugin:mocha/recommended",
     "airbnb-typescript/base"
   ],
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2019,
     "sourceType": "module",
@@ -24,6 +23,7 @@
     "mocha"
   ],
   "rules": {
+    "import/prefer-default-export": "off",
     "no-underscore-dangle": "off",
     "no-console": "off",
     "camelcase": "warn",
@@ -38,13 +38,17 @@
     "implicit-arrow-linebreak": "off",
     "consistent-return": "off",
     "@typescript-eslint/naming-convention": [
-      "error", { 
+      "error",
+      {
         "selector": "property",
-        "format": ["strictCamelCase"],
+        "format": [
+          "strictCamelCase"
+        ],
         "filter": {
-        "regex": "^_",
-        "match": false
-      } }
+          "regex": "^_",
+          "match": false
+        }
+      }
     ],
     "@typescript-eslint/no-unused-vars": [
       "error",
@@ -53,7 +57,13 @@
         "ignoreRestSiblings": true
       }
     ],
-    "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+    "@typescript-eslint/lines-between-class-members": [
+      "error",
+      "always",
+      {
+        "exceptAfterSingleLine": true
+      }
+    ],
     "no-unused-vars": [
       "error",
       {
