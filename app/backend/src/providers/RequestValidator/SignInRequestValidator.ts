@@ -15,8 +15,7 @@ export class SignInValidator implements IRequestValidator {
     password: z.string(),
   });
 
-  public async validate(data: unknown): Promise<any> {
-    const result = await this.schema.parseAsync(data);
-    return result;
+  public async validate(data: unknown): Promise<void> {
+    await this.schema.parseAsync(data);
   }
 }
