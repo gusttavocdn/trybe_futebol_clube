@@ -1,7 +1,9 @@
 import { Model, ModelCtor } from 'sequelize';
+import { IRepository } from '../contracts/IRepository';
 
-export default abstract class BaseRepository<T extends Model, K> {
-  private readonly model: ModelCtor<T>;
+export default abstract class BaseRepository<T extends Model, K>
+implements IRepository<K> {
+  protected readonly model: ModelCtor<T>;
 
   constructor(model: ModelCtor<T>) {
     this.model = model;
@@ -23,7 +25,7 @@ export default abstract class BaseRepository<T extends Model, K> {
     return this.model.create(data) as unknown as K;
   }
 
-  public async update(id: number, data: Partial<T>): Promise<boolean> {
+  public async update(id: number, data: Partial<K>): Promise<boolean> {
     const [rowsAffected] = await this.model.update(data, {
       where: { id },
     });
