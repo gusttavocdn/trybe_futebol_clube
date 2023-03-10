@@ -4,7 +4,6 @@ import { ITokenManager, IUserCredentials } from './ITokenManager';
 const SECRET_KEY = process.env.JWT_SECRET || 'secret';
 
 export class TokenManager implements ITokenManager {
-  private _jwt: typeof jwt;
   private _config: jwt.SignOptions;
 
   constructor() {
@@ -17,7 +16,7 @@ export class TokenManager implements ITokenManager {
   };
 
   public async verify(token: string): Promise<IUserCredentials> {
-    const { data } = this._jwt.verify(token, SECRET_KEY, this._config) as {
+    const { data } = jwt.verify(token, SECRET_KEY, this._config) as {
       data: IUserCredentials;
     };
 

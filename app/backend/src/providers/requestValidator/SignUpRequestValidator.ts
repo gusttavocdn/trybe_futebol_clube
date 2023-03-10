@@ -26,7 +26,7 @@ export class SignUpValidator implements IRequestValidator {
             'one uppercase letter, one special character,',
             'and one number',
           ].join(' '),
-        }
+        },
       ),
     role: z.enum(['user', 'admin'], {
       required_error: 'Role is required',
