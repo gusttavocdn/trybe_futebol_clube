@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
-import { IPasswordCompare } from './IPasswordCompare';
+import { IPasswordManager } from './IPasswordManager';
 
-export class PasswordCompare implements IPasswordCompare {
+export class PasswordManager implements IPasswordManager {
   private readonly bcrypt = bcrypt;
 
   public async isValid(
@@ -9,5 +9,9 @@ export class PasswordCompare implements IPasswordCompare {
     hashedPassword: string,
   ): Promise<boolean> {
     return this.bcrypt.compare(password, hashedPassword);
+  }
+
+  public async hashPassword(password: string): Promise<string> {
+    return this.bcrypt.hash(password, 10);
   }
 }

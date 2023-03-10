@@ -1,11 +1,11 @@
-import { IPasswordCompare, ITokenManager } from '../../../../providers';
+import { IPasswordManager, ITokenManager } from '../../../../providers';
 import { IFindUserByEmailRepository } from '../../../../repositories/contracts/IUsersRepository';
 import { ILoginDTO } from '../../dtos/ILoginDTO';
 
 export default class SignInService {
   constructor(
     private readonly _repository: IFindUserByEmailRepository,
-    private readonly _passwordCompare: IPasswordCompare,
+    private readonly _passwordManager: IPasswordManager,
     private readonly _tokenManager: ITokenManager,
   ) {}
 
@@ -14,7 +14,7 @@ export default class SignInService {
 
     if (!user) throw new Error();
 
-    const isPasswordValid = await this._passwordCompare.isValid(
+    const isPasswordValid = await this._passwordManager.isValid(
       password,
       user.password,
     );

@@ -3,13 +3,13 @@ import UserModel from '../../../../database/models/UserModel';
 import SignInService from './SignInService';
 import SignInController from './SignInController';
 import {
-  PasswordCompare,
+  PasswordManager,
   SignInValidator,
   TokenManager,
 } from '../../../../providers';
 
 const usersRepository = new UsersRepository(UserModel);
-const passwordCompare = new PasswordCompare();
+const passwordCompare = new PasswordManager();
 const tokenManager = new TokenManager();
 const signInService = new SignInService(
   usersRepository,
