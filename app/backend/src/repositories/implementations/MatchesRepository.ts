@@ -3,15 +3,7 @@ import MatchModel from '../../database/models/MatchModel';
 import { Match } from '../../entities';
 import { IMatchesRepository } from '../contracts/IMatchesRepository';
 import BaseRepository from './BaseRepository';
-
-type IMatchDTO = {
-  teamHome: {
-    teamName: string;
-  };
-  teamAway: {
-    teamName: string;
-  };
-} & Match;
+import { IMatchDTO } from '../../modules/matches/dtos/IMatchDTO';
 
 const includeOptions = [
   {
@@ -62,4 +54,15 @@ export class MatchesRepository
 
     return matches as unknown as IMatchDTO[];
   };
+
+  public async finishMatch(id: number): Promise<boolean> {
+    const [rowsAffected] = await this.model.update(
+      { inProgress: false },
+      {
+        where: { id },
+      },
+    );
+
+    return rowsAffected === 1;
+  }
 }

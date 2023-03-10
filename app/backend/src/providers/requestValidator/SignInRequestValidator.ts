@@ -18,7 +18,6 @@ export class SignInValidator implements IRequestValidator {
   });
 
   public async validate(data: unknown): Promise<void> {
-    console.log('data => ', data);
     await this.schema.parseAsync(data);
   }
 }

@@ -15,4 +15,5 @@ export interface IMatchesRepository extends IRepository<Match> {
   findById(id: number): Promise<IMatchDTO | null>;
   findInProgress(): Promise<IMatchDTO[]>;
   findNotInProgress(): Promise<IMatchDTO[]>;
+  finishMatch(id: number): Promise<boolean>;
 }
