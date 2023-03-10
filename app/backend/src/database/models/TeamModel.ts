@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import db from '.';
+import MatchModel from './MatchModel';
 // import MatchModel from './SequelizeMatch';
 
 class TeamModel extends Model {
@@ -28,24 +29,24 @@ TeamModel.init(
   },
 );
 
-// MatchModel.belongsTo(TeamModel, {
-//   foreignKey: 'homeTeam',
-//   as: 'teamHome',
-// });
+MatchModel.belongsTo(TeamModel, {
+  foreignKey: 'homeTeam',
+  as: 'teamHome',
+});
 
-// MatchModel.belongsTo(TeamModel, {
-//   foreignKey: 'awayTeam',
-//   as: 'teamAway',
-// });
+MatchModel.belongsTo(TeamModel, {
+  foreignKey: 'awayTeam',
+  as: 'teamAway',
+});
 
-// TeamModel.hasMany(MatchModel, {
-//   foreignKey: 'homeTeam',
-//   as: 'teamsHome',
-// });
+TeamModel.hasMany(MatchModel, {
+  foreignKey: 'homeTeam',
+  as: 'teamsHome',
+});
 
-// TeamModel.hasMany(MatchModel, {
-//   foreignKey: 'awayTeam',
-//   as: 'teamsAway',
-// });
+TeamModel.hasMany(MatchModel, {
+  foreignKey: 'awayTeam',
+  as: 'teamsAway',
+});
 
 export default TeamModel;
