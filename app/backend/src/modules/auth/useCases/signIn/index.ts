@@ -2,11 +2,21 @@ import UsersRepository from '../../../../repositories/implementations/UsersRepos
 import UserModel from '../../../../database/models/UserModel';
 import SignInService from './SignInService';
 import SignInController from './SignInController';
-import { PasswordCompare, SignInValidator } from '../../../../providers';
+import {
+  PasswordCompare,
+  SignInValidator,
+  TokenManager,
+} from '../../../../providers';
 
 const usersRepository = new UsersRepository(UserModel);
 const passwordCompare = new PasswordCompare();
-const signInService = new SignInService(usersRepository, passwordCompare);
+const tokenManager = new TokenManager();
+const signInService = new SignInService(
+  usersRepository,
+  passwordCompare,
+  tokenManager,
+);
+
 const requestValidator = new SignInValidator();
 const signInController = new SignInController(signInService, requestValidator);
 
