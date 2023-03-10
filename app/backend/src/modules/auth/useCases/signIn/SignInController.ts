@@ -11,8 +11,8 @@ export default class SignInController {
   public handle = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
+    console.log('password =>', password);
     await this._validator.validate({ email, password });
-
     const token = await this._service.execute({ email, password });
     return res.status(200).json({ token });
   };

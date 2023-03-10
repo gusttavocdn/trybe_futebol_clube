@@ -7,8 +7,8 @@ import { authToken } from '../middlewares/authToken';
 
 const authRouter = Router();
 
+authRouter.get('/login/validate', authToken, validateController.handle);
 authRouter.post('/login', signInController.handle);
 authRouter.post('/signup', signUpController.handle);
-authRouter.get('/login/validate', authToken, validateController.handle);
 
 export { authRouter };
