@@ -6,3 +6,4 @@ export * from './tokenManager/ITokenManager';
 export * from './tokenManager/TokenManager';
 export * from './requestValidator/SignUpRequestValidator';
 export * from './requestValidator/UpdateMatchRequestValidator';
+export * from './requestValidator/CreateMatchRequestValidator';
