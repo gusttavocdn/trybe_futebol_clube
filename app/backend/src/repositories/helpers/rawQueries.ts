@@ -1,14 +1,12 @@
 import { ScoreboardOptions } from '../contracts/IMatchesRepository';
 
-const DATABASE = process.env.PGDATABASE || 'TRYBE_FUTEBOL_CLUBE';
-
 /* eslint-disable max-lines-per-function */
 export const leaderboardQuery = (
   teamA: ScoreboardOptions,
   teamB: ScoreboardOptions,
 ) => `
 SELECT
-    t.team_name AS name,
+    MAX(t.team_name) AS name,
 SUM(
     CASE
         WHEN ${teamA}_goals > ${teamB}_goals THEN 3
@@ -50,12 +48,12 @@ ROUND( (
     2
 ) AS efficiency
 FROM
-${DATABASE}.matches AS m
-INNER JOIN ${DATABASE}.teams AS t ON m.${teamA} = t.id
-WHERE in_progress = 0
+matches AS m
+INNER JOIN teams AS t ON m.${teamA} = t.id
+WHERE in_progress = false
 GROUP BY ${teamA}
 ORDER BY
-totalPoints DESC,
-goalsBalance DESC,
-goalsFavor DESC,
-goalsOwn DESC;`;
+    totalPoints DESC,
+    goalsBalance DESC,
+    goalsFavor DESC,
+    goalsOwn DESC;`;
