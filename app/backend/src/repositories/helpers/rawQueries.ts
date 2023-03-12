@@ -1,5 +1,7 @@
 import { ScoreboardOptions } from '../contracts/IMatchesRepository';
 
+const DATABASE = process.env.PGDATABASE || 'TRYBE_FUTEBOL_CLUBE';
+
 /* eslint-disable max-lines-per-function */
 export const leaderboardQuery = (
   teamA: ScoreboardOptions,
@@ -48,8 +50,8 @@ ROUND( (
     2
 ) AS efficiency
 FROM
-TRYBE_FUTEBOL_CLUBE.matches AS m
-INNER JOIN TRYBE_FUTEBOL_CLUBE.teams AS t ON m.${teamA} = t.id
+${DATABASE}.matches AS m
+INNER JOIN ${DATABASE}.teams AS t ON m.${teamA} = t.id
 WHERE in_progress = 0
 GROUP BY ${teamA}
 ORDER BY
