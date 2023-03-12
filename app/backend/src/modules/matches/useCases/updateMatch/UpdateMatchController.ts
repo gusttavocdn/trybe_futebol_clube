@@ -10,7 +10,7 @@ export class UpdateMatchController {
   ) {}
 
   public handle = async (req: Request, res: Response) => {
-    this._requestValidator.validate(req.body);
+    await this._requestValidator.validate(req.body);
 
     const { id } = req.params;
     const { homeTeamGoals, awayTeamGoals } = req.body;

@@ -1,9 +1,14 @@
 import TeamModel from '../../database/models/TeamModel';
 import MatchModel from '../../database/models/MatchModel';
 import { Match } from '../../entities';
-import { IMatchesRepository } from '../contracts/IMatchesRepository';
+import {
+  IMatchesRepository,
+  ScoreboardOptions,
+} from '../contracts/IMatchesRepository';
 import BaseRepository from './BaseRepository';
 import { IMatchDTO } from '../../modules/matches/dtos/IMatchDTO';
+import { leaderboardQuery } from '../helpers/rawQueries';
+import { IScoreboardDTO } from '../../modules/matches/dtos/IScoreboardDTO';
 
 const includeOptions = [
   {
@@ -64,5 +69,16 @@ export class MatchesRepository
     );
 
     return rowsAffected === 1;
+  }
+
+  public async getScoreboard(
+    homeTeam: ScoreboardOptions,
+    awayTeam: ScoreboardOptions,
+  ): Promise<IScoreboardDTO[]> {
+    const [scoreboard] = (await this.model.sequelize?.query(
+      leaderboardQuery(homeTeam, awayTeam),
+    )) as [IScoreboardDTO[], unknown];
+
+    return scoreboard;
   }
 }

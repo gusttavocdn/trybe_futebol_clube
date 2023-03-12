@@ -1,14 +1,9 @@
+import { IScoreboardDTO } from '../../modules/matches/dtos/IScoreboardDTO';
+import { IMatchDTO } from '../../modules/matches/dtos/IMatchDTO';
 import { Match } from '../../entities';
 import { IRepository } from './IRepository';
 
-type IMatchDTO = {
-  teamHome: {
-    teamName: string;
-  };
-  teamAway: {
-    teamName: string;
-  };
-} & Match;
+export type ScoreboardOptions = 'home_team' | 'away_team';
 
 export interface IMatchesRepository extends IRepository<Match> {
   findAll(): Promise<IMatchDTO[]>;
@@ -16,4 +11,8 @@ export interface IMatchesRepository extends IRepository<Match> {
   findInProgress(): Promise<IMatchDTO[]>;
   findNotInProgress(): Promise<IMatchDTO[]>;
   finishMatch(id: number): Promise<boolean>;
+  getScoreboard(
+    homeTeam: ScoreboardOptions,
+    awayTeam: ScoreboardOptions
+  ): Promise<IScoreboardDTO[]>;
 }
